@@ -1,9 +1,11 @@
 "use client";
 
+import { logout } from "@/lib/auth-actions";
+import { Session } from "next-auth";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ session }: { session: Session | null }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   return (
     <nav className="bg-slate-800 border-b border-slate-700 shado-lg">
@@ -21,18 +23,39 @@ export default function Navbar() {
             >
               Events
             </Link>
-            <Link
-              href="/events/create"
-              className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
-            >
-              Create Event
-            </Link>
-            <Link
-              href="/dashboard"
-              className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
-            >
-              Dashboard
-            </Link>
+            {session ? (
+              <>
+                <Link
+                  href="/events/create"
+                  className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Create Event
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Dashboard
+                </Link>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={logout}
+                    className="bg-primary text-background cursor-pointer px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link
+                  href="/login"
+                  className="bg-primary text-background px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
+                >
+                  Login with Github
+                </Link>
+              </div>
+            )}
           </div>
           <div className="md:hidden flex items-center">
             <button
