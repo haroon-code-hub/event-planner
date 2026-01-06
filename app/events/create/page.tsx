@@ -42,7 +42,7 @@ export default function CreateEventPage() {
             placeholder="Enter event description."
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-col-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="date" className="block text-sm text-medium mb-2">
               Date & Time *
@@ -72,7 +72,7 @@ export default function CreateEventPage() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-col-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label
               htmlFor="maxAttendees"
